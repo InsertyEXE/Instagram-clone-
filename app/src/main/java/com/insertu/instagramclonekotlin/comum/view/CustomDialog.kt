@@ -27,6 +27,7 @@ class CustomDialog(context: Context) : Dialog(context) {
     override fun setTitle(titleId: Int) {
         this.titleId = titleId
     }
+
     //vararg é um array do kotlin, mais moderno
     fun addButton( vararg texts: Int, listener: View.OnClickListener) {
 

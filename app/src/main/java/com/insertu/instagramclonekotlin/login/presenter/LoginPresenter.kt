@@ -13,22 +13,20 @@ class LoginPresenter(
 ) : Login.Presenter {
 
     override fun login(email: String, password: String) {
+
         val isEmailValid = Patterns.EMAIL_ADDRESS.matcher(email).matches()
         val isPasswordValid = password.length >= 8
 
-        if (!isEmailValid){
-            view?.displayEmailFailure(R.string.invalid_email)
-        }
-        else {
-            view?.displayEmailFailure(null)
-        }
 
-        if (!isPasswordValid){
-            view?.displayPasswordFailure(R.string.invalid_password)
-        }
-        else{
-            view?.displayPasswordFailure(null)
-        }
+        if (!isEmailValid) view?.displayEmailFailure(R.string.invalid_email)
+
+        else view?.displayEmailFailure(null)
+
+
+        if (!isPasswordValid) view?.displayPasswordFailure(R.string.invalid_password)
+
+        else view?.displayPasswordFailure(null)
+
 
         if (isEmailValid && isPasswordValid){
             view?.showProgressBar(true)

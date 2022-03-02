@@ -5,7 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import com.insertu.instagramclonekotlin.cadastro.view.CadastroActivity
+import com.insertu.instagramclonekotlin.cadastro.view.RegisterActivity
 import com.insertu.instagramclonekotlin.comum.base.DependencyInjector
 import com.insertu.instagramclonekotlin.comum.util.TxtWatcher
 import com.insertu.instagramclonekotlin.databinding.ActivityLoginBinding
@@ -69,7 +69,7 @@ class LoginActivity : AppCompatActivity(), Login.View {
     }
 
     private fun goToRegister(){
-        startActivity(Intent(this, CadastroActivity::class.java))
+        startActivity(Intent(this, RegisterActivity::class.java))
     }
 
     override fun showProgressBar(enabled: Boolean) {

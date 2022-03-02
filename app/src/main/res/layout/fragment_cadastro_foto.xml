@@ -49,13 +49,13 @@
                 />
 
             <com.insertu.instagramclonekotlin.login.view.LoadingButton
-                android:id="@+id/login_btn_enter"
+                android:id="@+id/cadastro_foto_btn_enter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:text="@string/add_photo" />
 
             <Button
-                android:id="@+id/cadastro_btn_pular"
+                android:id="@+id/cadastro_foto_btn_pular"
                 android:text="@string/jump"
                 style="@style/Theme.InstagramCloneKotlin.Button.Link"/>
 

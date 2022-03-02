@@ -25,13 +25,14 @@
             tools:context=".login.view.LoginActivity">
 
             <TextView
+                android:id="@+id/cadastro_welcome_txt"
                 style="@style/Theme.InstagramCloneKotlin.TextViewbase.Form"
                 android:text="@string/welcome_to_instagram"/>
 
             <com.insertu.instagramclonekotlin.login.view.LoadingButton
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/login_btn_enter"
+                android:id="@+id/cadastro_welcome_btn_enter"
                 app:text="@string/next"/>
 
         </LinearLayout>

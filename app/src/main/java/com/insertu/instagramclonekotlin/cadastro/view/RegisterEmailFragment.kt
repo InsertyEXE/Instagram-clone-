@@ -1,19 +1,23 @@
 package com.insertu.instagramclonekotlin.cadastro.view
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import com.insertu.instagramclonekotlin.R
-import com.insertu.instagramclonekotlin.cadastro.CadastroView
+import com.insertu.instagramclonekotlin.cadastro.RegisterView
+import com.insertu.instagramclonekotlin.cadastro.presenter.RegisterEmailPresenter
+import com.insertu.instagramclonekotlin.comum.base.DependencyInjector
 import com.insertu.instagramclonekotlin.comum.util.TxtWatcher
 import com.insertu.instagramclonekotlin.databinding.FragmentCadastroEmailBinding
 
-class CadastrarEmailFragment : Fragment(R.layout.fragment_cadastro_email), CadastroView.View {
+class RegisterEmailFragment : Fragment(R.layout.fragment_cadastro_email), RegisterView.View {
 
     private var binding: FragmentCadastroEmailBinding? = null
+    private var fragmentAttachListener: FragmentAttachListener? = null
 
 
-    override lateinit var presenter: CadastroView.Presenter
+    override lateinit var presenter: RegisterView.Presenter
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -21,6 +25,9 @@ class CadastrarEmailFragment : Fragment(R.layout.fragment_cadastro_email), Cadas
 
         binding = FragmentCadastroEmailBinding.bind(view)
 
+
+        val repository = DependencyInjector.registerEmailRepository()
+        presenter = RegisterEmailPresenter(this, repository)
         binding?.let {
 
             with(it){
@@ -44,20 +51,40 @@ class CadastrarEmailFragment : Fragment(R.layout.fragment_cadastro_email), Cadas
         }
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if(context is FragmentAttachListener){
+            fragmentAttachListener = context
+        }
+    }
+
     private val watcher = TxtWatcher {
         binding?.loginBtnEnter?.isEnabled  = binding?.cadastroEdtEmail?.text.toString().isNotEmpty()
 
     }
 
-    override fun displayEmailError(emailError: Int?) {
+    override fun showProgressBar(enable: Boolean) {
+        binding?.loginBtnEnter?.showProgressbar(enable)
+    }
 
+    override fun displayEmailError(emailError: Int?) {
+        binding?.cadastroEdtEmailInput?.error = emailError?.let { getString(it) }
+    }
+
+    override fun onEmailFailure(message: String) {
+        binding?.cadastroEdtEmailInput?.error = message
+    }
+
+    override fun goToNameAndpassword(email: String) {
+        fragmentAttachListener?.goToNameAndPassword(email)
     }
 
 
     override fun onDestroy() {
 
         binding = null
-        //presenter.onDestroy()
+        fragmentAttachListener = null
+        presenter.onDestroy()
 
         super.onDestroy()
 
