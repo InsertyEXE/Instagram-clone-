@@ -25,7 +25,7 @@
             tools:context=".login.view.LoginActivity">
 
             <ImageView
-                android:id="@+id/login_img_logo"
+                android:id="@+id/cadastro_img_perfil"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginBottom="48dp"
@@ -106,6 +106,7 @@
         android:layout_marginStart="0dp"
         android:layout_marginEnd="0dp"
         android:background="@color/white"
+        android:textColor="@color/black"
         android:padding="24dp"
         android:text="@string/does_not_have_account"
         android:textAlignment="center"

@@ -31,8 +31,6 @@ class LoginActivity : AppCompatActivity(), Login.View {
         binding.loginEdtEmail.addTextChangedListener(watcher)
         binding.loginEdtSenha.addTextChangedListener(watcher)
 
-
-
         with(binding) {
 
             loginEdtEmail.addTextChangedListener(watcher)
@@ -47,14 +45,12 @@ class LoginActivity : AppCompatActivity(), Login.View {
             })
 
             loginBtnEnter.setOnClickListener {
-
                 presenter.login(loginEdtEmail.text.toString(), loginEdtSenha.text.toString())
 
             }
 
 
             loginTxtRegister.setOnClickListener {
-
                 goToRegister()
             }
 

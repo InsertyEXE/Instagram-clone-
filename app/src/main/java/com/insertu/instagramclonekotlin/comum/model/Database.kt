@@ -5,6 +5,7 @@ import java.util.*
 object Database {
 
      val usersAuth = hashSetOf<UserAuth>()
+    val photo = hashSetOf<Photo>()
 
     var sessionAuth: UserAuth? = null
 
@@ -12,5 +13,6 @@ object Database {
         usersAuth.add(UserAuth(UUID.randomUUID().toString(),"UserA", "a@gmail.com", "12345678"))
         usersAuth.add(UserAuth(UUID.randomUUID().toString(), "UserB", "b@gmail.com", "87654321"))
 
+        sessionAuth = usersAuth.first()
     }
 }
