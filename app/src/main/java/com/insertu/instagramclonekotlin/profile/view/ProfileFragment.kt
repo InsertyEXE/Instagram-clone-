@@ -7,58 +7,30 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.insertu.instagramclonekotlin.R
+import com.insertu.instagramclonekotlin.comum.base.BaseFragment
+import com.insertu.instagramclonekotlin.databinding.FragmentProfileBinding
 
-class ProfileFragment : Fragment() {
+class ProfileFragment :
+    BaseFragment<FragmentProfileBinding, Profile.Presenter>
+        (
+        R.layout.fragment_profile,
+        FragmentProfileBinding::bind
+    ) {
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_profile, container, false)
+    override lateinit var presenter: Profile.Presenter
 
+    override fun setupView() {
+        binding?.profileRvFotos?.layoutManager = GridLayoutManager(requireContext(), 3)
+        binding?.profileRvFotos?.adapter = PostAdapter()
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        val rvGrid = view.findViewById<RecyclerView>(R.id.profile_rv_fotos)
-        rvGrid.layoutManager = GridLayoutManager(requireContext(), 3)
-        rvGrid.adapter = postAdapter()
+    override fun getMenu(): Int {
+        return R.layout.fragment_profile
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_profile, menu)
-        super.onCreateOptionsMenu(menu, inflater)
+    override fun setupPresenter() {
+        //TODO: presenter(this, repository
     }
 
 
-    private class postAdapter : RecyclerView.Adapter<postAdapter.postViewHolder>() {
-
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): postViewHolder {
-            return postViewHolder(
-                LayoutInflater.from(parent.context).inflate(R.layout.item_profile_grid, parent, false)
-            )
-        }
-
-        override fun onBindViewHolder(holder: postViewHolder, position: Int) {
-            holder.bind(R.drawable.ic_insta_add)
-        }
-
-        override fun getItemCount(): Int {
-            return 30
-        }
-
-        private class postViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-            fun bind(imagem: Int){
-                itemView.findViewById<ImageView>(R.id.item_profile_img_grid).setImageResource(imagem)
-            }
-        }
-
-    }
 }
