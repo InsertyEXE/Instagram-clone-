@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.WindowInsetsController
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.insertu.instagramclonekotlin.R
 import com.insertu.instagramclonekotlin.camera.view.CameraFragment
@@ -60,7 +62,26 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
     }
 
+    private fun setScrollToolbar(scrollToolbarEnabled: Boolean) {
+
+        val params = binding.toolbar.layoutParams as AppBarLayout.LayoutParams
+        val cordinatorParams = binding.mainFragment.layoutParams as CoordinatorLayout.LayoutParams
+
+        if (scrollToolbarEnabled){
+            params.scrollFlags = AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL or AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS
+            cordinatorParams.behavior = AppBarLayout.Behavior()
+        } else {
+            params.scrollFlags = 0
+            cordinatorParams.behavior = null
+        }
+
+        binding.mainFragment.layoutParams = cordinatorParams
+    }
+
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
+
+        var scrollToolbarEnabled = false
+
         when(item.itemId){
             R.id.menu_bottom_home ->{
                 if (currentFragment == homeFragment) return false
@@ -73,6 +94,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
             R.id.menu_bottom_profile ->{
                 if (currentFragment == profileFragment) return false
                 currentFragment = profileFragment
+                scrollToolbarEnabled = true
             }
             R.id.menu_bottom_search ->{
                 if (currentFragment == searchFragment) return false
@@ -80,6 +102,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
             }
         }
 
+        setScrollToolbar(scrollToolbarEnabled)
 
        currentFragment?.let {
 
@@ -89,4 +112,6 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
         return true
     }
+
+
 }
