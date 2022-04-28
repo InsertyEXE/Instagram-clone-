@@ -2,6 +2,8 @@ package com.insertu.instagramclonekotlin.profile.view
 
 import com.insertu.instagramclonekotlin.comum.base.BasePresenter
 import com.insertu.instagramclonekotlin.comum.base.BaseView
+import com.insertu.instagramclonekotlin.comum.model.Post
+import com.insertu.instagramclonekotlin.comum.model.UserAuth
 
 interface Profile {
 
@@ -12,7 +14,10 @@ interface Profile {
 
     interface View : BaseView<Presenter>{
         fun showProgressBar(enabled: Boolean)
-        //TODO: outros metodos
+        fun displayUserProfile(userauth: UserAuth)
+        fun displayRequestFailure(message: String)
+        fun displayEmptyPost()
+        fun displayFullpost(posts: List<Post>)
     }
 
 }
