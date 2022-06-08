@@ -28,7 +28,7 @@ abstract class BaseFragment<B, P : BasePresenter>(
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        getMenu()?.let {
+       if( getMenu() != null){
             setHasOptionsMenu(true)
         }
 
@@ -36,12 +36,16 @@ abstract class BaseFragment<B, P : BasePresenter>(
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-
         getMenu()?.let {
             inflater.inflate(it, menu)
         }
-
         super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onDestroy() {
+        presenter.onDestroy()
+        binding = null
+        super.onDestroy()
     }
 
     open fun getMenu(): Int?{

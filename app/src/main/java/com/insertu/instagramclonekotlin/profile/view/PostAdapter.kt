@@ -25,7 +25,7 @@ class PostAdapter : RecyclerView.Adapter<PostAdapter.postViewHolder>() {
     }
 
     override fun getItemCount(): Int {
-        return 30
+        return itens.size
     }
 
     class postViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

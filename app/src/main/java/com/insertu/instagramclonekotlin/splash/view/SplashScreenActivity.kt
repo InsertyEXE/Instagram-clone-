@@ -39,8 +39,6 @@ class SplashScreenActivity : AppCompatActivity(), Splash.View {
             start()
         }
 
-
-
     }
 
 

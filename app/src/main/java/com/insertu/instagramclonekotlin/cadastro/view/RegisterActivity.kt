@@ -32,7 +32,6 @@ class RegisterActivity : AppCompatActivity(), FragmentAttachListener {
 
     private lateinit var currentFoto: Uri
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -117,9 +116,7 @@ class RegisterActivity : AppCompatActivity(), FragmentAttachListener {
 
         val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
 
-
         if (cameraIntent.resolveActivity(packageManager) != null) {
-
 
             val fotoFile: File? = try {
                 createImageFile()
@@ -129,7 +126,6 @@ class RegisterActivity : AppCompatActivity(), FragmentAttachListener {
             }
 
             fotoFile?.also {
-
 
                 val fotoUri = FileProvider.getUriForFile(this, "com.insertu.instagramclonekotlin.fileprovider", it)
                 currentFoto = fotoUri

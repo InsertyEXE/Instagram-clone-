@@ -13,7 +13,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.insertu.instagramclonekotlin.R
 import com.insertu.instagramclonekotlin.camera.view.CameraFragment
 import com.insertu.instagramclonekotlin.databinding.ActivityMainBinding
-import com.insertu.instagramclonekotlin.extension.hiddenKeyboard
 import com.insertu.instagramclonekotlin.extension.replaceFragment
 import com.insertu.instagramclonekotlin.home.view.HomeFragment
 import com.insertu.instagramclonekotlin.profile.view.ProfileFragment
@@ -65,7 +64,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
     private fun setScrollToolbar(scrollToolbarEnabled: Boolean) {
 
         val params = binding.toolbar.layoutParams as AppBarLayout.LayoutParams
-        val cordinatorParams = binding.mainFragment.layoutParams as CoordinatorLayout.LayoutParams
+        val cordinatorParams = binding.mainAppBar.layoutParams as CoordinatorLayout.LayoutParams
 
         if (scrollToolbarEnabled){
             params.scrollFlags = AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL or AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS
@@ -75,7 +74,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
             cordinatorParams.behavior = null
         }
 
-        binding.mainFragment.layoutParams = cordinatorParams
+        binding.mainAppBar.layoutParams = cordinatorParams
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -99,6 +98,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
             R.id.menu_bottom_search ->{
                 if (currentFragment == searchFragment) return false
                 currentFragment = searchFragment
+
             }
         }
 

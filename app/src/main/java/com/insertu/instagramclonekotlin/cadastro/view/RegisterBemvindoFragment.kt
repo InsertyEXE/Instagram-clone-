@@ -50,6 +50,7 @@ class RegisterBemvindoFragment : Fragment(R.layout.fragment_cadastro_welcome) {
 
     override fun onDestroy() {
         binding = null
+        fragmentAttachListener = null
         super.onDestroy()
     }
 

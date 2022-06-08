@@ -9,9 +9,12 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.insertu.instagramclonekotlin.R
 import com.insertu.instagramclonekotlin.comum.base.BaseFragment
+import com.insertu.instagramclonekotlin.comum.base.DependencyInjector
 import com.insertu.instagramclonekotlin.comum.model.Post
 import com.insertu.instagramclonekotlin.comum.model.UserAuth
 import com.insertu.instagramclonekotlin.databinding.FragmentProfileBinding
+import com.insertu.instagramclonekotlin.profile.Profile
+import com.insertu.instagramclonekotlin.profile.presenter.ProfilePresenter
 
 class ProfileFragment :
     BaseFragment<FragmentProfileBinding, Profile.Presenter>
@@ -26,14 +29,13 @@ class ProfileFragment :
     override fun setupView() {
         binding?.profileRvFotos?.layoutManager = GridLayoutManager(requireContext(), 3)
         binding?.profileRvFotos?.adapter = adapter
-    }
 
-    override fun getMenu(): Int {
-        return R.layout.fragment_profile
+        presenter.fetchUserProfile()
     }
 
     override fun setupPresenter() {
-        //TODO: presenter(this, repository
+        val repository = DependencyInjector.profileRepository()
+        presenter = ProfilePresenter(this, repository)
     }
 
     override fun showProgressBar(enabled: Boolean) {
@@ -45,7 +47,7 @@ class ProfileFragment :
         binding?.profileTxtFollowingCount?.text = userauth.countFollowing.toString()
         binding?.profileTxtFollowersCount?.text = userauth.countFollowers.toString()
         binding?.profileTxtUsername?.text = userauth.name
-        binding?.profileTxtBio?.text = "TODO: BIO"
+        binding?.profileTxtBio?.text = " BIO"
         presenter.fetchUserPost()
     }
 
@@ -62,6 +64,9 @@ class ProfileFragment :
         binding?.profileEmptyPost?.visibility = View.GONE
         binding?.profileRvFotos?.visibility = View.VISIBLE
         adapter.itens = posts
-        adapter.notifyDataSetChanged()
+    }
+
+    override fun getMenu(): Int {
+        return R.menu.menu_profile
     }
 }
