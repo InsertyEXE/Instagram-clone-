@@ -5,9 +5,9 @@ data class UserAuth(
     val name: String,
     val email: String,
     val password: String,
-    val countPost: Int,
-    val countFollowing: Int,
-    val countFollowers: Int
+    val countPost: Int = 0,
+    val countFollowing: Int = 0,
+    val countFollowers: Int = 0
 ) {
 
 }

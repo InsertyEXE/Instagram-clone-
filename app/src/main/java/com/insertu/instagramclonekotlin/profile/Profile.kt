@@ -1,4 +1,4 @@
-package com.insertu.instagramclonekotlin.profile.view
+package com.insertu.instagramclonekotlin.profile
 
 import com.insertu.instagramclonekotlin.comum.base.BasePresenter
 import com.insertu.instagramclonekotlin.comum.base.BaseView
